@@ -1,0 +1,22 @@
+Day 1:
+Introduction
+	Personal History
+	Course Guidelines
+		(intro 1-8)
+Computer Setup
+	Python
+	Git
+	Jupityr
+	Atom text editor
+	
+	
+Basic Concepts and programming introduction
+
+Lesson 1:
+
+Shell Games
+Greeting
+Volume Converter
+Change Return
+Wall Painting
+Madlib
