@@ -1,7 +1,7 @@
-#keep_running = True
-#while keep_running:
-def written_numbers(input_num):
-    print_num = int(input ("Enter a number between 1 and 99 (inclusive)"))
+keep_running = True
+while keep_running:
+#def written_numbers(input_num):
+    print_num = int(input("Please enter your number between 1 and 99:"))
     print_str = str(print_num) + " "
     if print_num == 10: print_str += "ten"
     if print_num == 11: print_str += "eleven"
@@ -56,6 +56,6 @@ def written_numbers(input_num):
         elif (ones_place == 9):
             print_str = print_str + "nine"
     print (print_str)
-# keep_running_check = input ("Do you want to keep running? (y)")
-# if (keep_running_check != 'y' and keep_running_check != 'Yes'):
-#     keep_running = False
+    keep_running_check = input ("Do you want to keep running? (y)")
+    if (keep_running_check != 'y' and keep_running_check != 'Yes'):
+        keep_running = False

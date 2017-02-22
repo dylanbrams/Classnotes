@@ -1,58 +1,141 @@
-continue_changing = 'y'
-twenties_changed_total = 0
-tens_changed_total = 0
-fives_changed_total = 0
-ones_changed_total = 0
-quarters_changed_total = 0
-dimes_changed_total = 0
-nickels_changed_total = 0
-pennies_changed_total = 0
+"""An object-oriented solution to the cash register problem."""
 
-while (continue_changing == 'y'):
+class ChangeMachine(object):
+    """A single change machine object.  Change machines have the following properties:
+        local_change_set: a change_set object containing all the change inside the register
+    """
+    def __init__(self, local_change_set):
+        self.local_change_set = local_change_set
+
+class Change_Set(object):
+    """
+        A change set object.  Contains a collection of all the types of change available and their counts.
+
+        fifties, twenties, tens, fives, ones, quarters, dimes, nickels, and pennies.  All integers.
+    """
+    def __init__(self, fifties, twenties, tens, fives, ones, quarters, dimes, nickels, pennies, total_value):
+        '''
+        Initializes a change set.  Pass in a zero for total value to have it calculated for you.
+        :param fifties:
+        :param twenties:
+        :param tens:
+        :param fives:
+        :param ones:
+        :param quarters:
+        :param dimes:
+        :param nickels:
+        :param pennies:
+        :param total_value:
+        '''
+        self.fifties = fifties
+        self.twenties = twenties
+        self.tens = tens
+        self.fives = fives
+        self.ones = ones
+        self.quarters = quarters
+        self.dimes = dimes
+        self.nickels = nickels
+        self.pennies = pennies
+        if total_value > 0:
+            self.total_value = total_value
+        else:
+            self.total_value = (50 * fifties + 20 * twenties + 10 * tens + 5 * fives + 1 * ones +
+                                .25 * quarters + .10 * dimes + .05 * nickels + .01 * pennies)
+
+    def __init__(self):
+        '''
+        Initializes an empty change set.
+        '''
+        self.fifties = 0
+        self.twenties = 0
+        self.tens = 0
+        self.fives = 0
+        self.ones = 0
+        self.quarters = 0
+        self.dimes = 0
+        self.nickels = 0
+        self.pennies = 0
+        self.total_value = 0
+
+    def change_amount(self, amount):
+        '''
+        Converts an input amount to a change set.
+        :param amount:
+        :return:
+        '''
+        self.total_value = amount
+        running_total = amount
+        self.fifties = self.denomination_change(50, running_total)
+        running_total -= self.fifties * 50
+        self.twenties = self.denomination_change(20, running_total)
+        running_total -= self.twenties * 20
+        self.tens = self.denomination_change(10, running_total)
+        running_total -= self.tens * 10
+        self.fives = self.denomination_change(5, running_total)
+        running_total -= self.fives * 5
+        self.ones = self.denomination_change(1, running_total)
+        running_total -= self.ones
+        self.quarters = self.denomination_change(.25, running_total)
+        running_total -= self.quarters * .25
+        self.dimes = self.denomination_change(.10, running_total)
+        running_total -= self.dimes * .10
+        self.nickels = self.denomination_change(.05, running_total)
+        running_total -= self.nickels * .05
+        self.pennies = self.denomination_change(.01, running_total)
+        running_total -= self.pennies * .01
+        if round(running_total, 2) > 0:
+            print("Error: accurate change was not provided.")
+
+
+    def denomination_change(self, denomination_amount, value):
+        """Returns the count of a particular denomination included in a value."""
+        if value > .01:
+            return int(value // denomination_amount)
+        elif value == .01:
+            # Math around pennies is different because of the errors involved in Python's float calculations.
+            return int(round((value * 100),0))
+        else:
+            return 0
+        print("Denomination Amount: " + str(denomination_amount) + " denomination_count: " + str(denomination_count) +
+              " value: "+ str(value) + "ID : " + str(id(denomination_count)))
+
+    def print_change(self):
+        '''
+        Print out the total amount of change in the current set and what that set contains.
+        :return:
+        '''
+        print("Current Change Value: " + '${:,.2f}'.format(self.total_value) )
+        if self.fifties > 0:
+            print (str(self.fifties) + " : fifties")
+        if self.twenties > 0:
+            print (str(self.twenties) + " : twenties")
+        if self.tens > 0:
+            print (str(self.tens) + " : tens")
+        if self.fives > 0:
+            print (str(self.fives) + " : fives")
+        if self.ones > 0:
+            print (str(self.ones) + " : ones")
+        if self.quarters > 0:
+            print (str(self.quarters) + " : quarters")
+        if self.dimes > 0:
+            print (str(self.dimes) + " : dimes")
+        if self.nickels > 0:
+            print (str(self.nickels) + " : nickels")
+        if self.pennies > 0:
+            print (str(self.pennies) + " : pennies")
+
+
+
+more_change = True
+while (more_change == True):
+    #register.make_change(change_running_total)
     money_input = round(float(input
-                        ("What amount would you like dispensed in change?  ")), 2)
-    twenties_changed = money_input // 20
-    twenties_changed_total += twenties_changed
-    change_running_total = money_input - twenties_changed * 20
-    tens_changed = change_running_total // 10
-    tens_changed_total += tens_changed
-    change_running_total -= tens_changed * 10
-    fives_changed = change_running_total // 5
-    fives_changed_total += fives_changed
-    change_running_total -= fives_changed * 5
-    ones_changed = change_running_total // 1
-    ones_changed_total += ones_changed
-    change_running_total -= ones_changed * 1
-    quarters_changed = change_running_total // .25
-    quarters_changed_total += quarters_changed
-    change_running_total -= quarters_changed * .25
-    dimes_changed = change_running_total // .10
-    dimes_changed_total += dimes_changed
-    change_running_total -= dimes_changed * .10
-    nickels_changed = change_running_total // .05
-    change_running_total -= nickels_changed * .05
-    nickels_changed_total += nickels_changed
-    pennies_changed = (round(change_running_total, 2)) * 100
-    pennies_changed_total += pennies_changed
+                              ("What amount would you like dispensed in change?  ")), 2)
+    current_change = Change_Set()
+    current_change.change_amount(money_input)
+    current_change.print_change()
 
 
-    if (twenties_changed > 0):
-        print ("Twenties Changed: " + str(int(twenties_changed)))
-    print ("Tens Changed: " + str(int(tens_changed)))
-    print ("Fives Changed: " + str(int(fives_changed)))
-    print ("Ones Changed: " + str(int(ones_changed)))
-    print ("Quarters Changed: " + str(int(quarters_changed)))
-    print ("Nickels Changed: " + str(int(dimes_changed)))
-    print ("Dimes Changed: " + str(int(nickels_changed)))
-    print ("Pennies Changed: " + str(int(pennies_changed)))
-    continue_changing = input ('Enter \'y\' to dispense more change.')
-
-print ("Total Twenties Changed: " + str(int(twenties_changed_total)))
-print ("Total Tens Changed: " + str(int(tens_changed_total)))
-print ("Total Fives Changed: " + str(int(fives_changed_total)))
-print ("Total Ones Changed: " + str(int(ones_changed_total)))
-print ("Total Quarters Changed: " + str(int(quarters_changed_total)))
-print ("Total Nickels Changed: " + str(int(dimes_changed_total)))
-print ("Total Dimes Changed: " + str(int(nickels_changed_total)))
-print ("Total Pennies Changed: " + str(int(pennies_changed_total)))
-
+    get_change = input ('Dispense more change.')
+    if get_change.lower()[:1] != 'y':
+        more_change = False
