@@ -13,7 +13,7 @@ class Change_Set(object):
 
         fifties, twenties, tens, fives, ones, quarters, dimes, nickels, and pennies.  All integers.
     """
-    def __init__(self, fifties, twenties, tens, fives, ones, quarters, dimes, nickels, pennies, total_value):
+    def __init__(self, fifties, twenties, tens, fives, ones, quarters, dimes, nickels, pennies , total_value):
         '''
         Initializes a change set.  Pass in a zero for total value to have it calculated for you.
         :param fifties:
@@ -36,7 +36,7 @@ class Change_Set(object):
         self.dimes = dimes
         self.nickels = nickels
         self.pennies = pennies
-        if total_value > 0:
+        if (total_value == None  or total_value > 0):
             self.total_value = total_value
         else:
             self.total_value = (50 * fifties + 20 * twenties + 10 * tens + 5 * fives + 1 * ones +

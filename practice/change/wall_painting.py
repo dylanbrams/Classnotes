@@ -1,3 +1,4 @@
+import math
 total_gallons = 0
 more_walls = True
 while (more_walls == True):
@@ -18,7 +19,5 @@ while (more_walls == True):
     if continue_painting != "Yes":
         more_walls = False
 
-    if (round(total_gallons, 0) != total_gallons ):
-        print ("Total gallons not even.")
-        total_gallons = int(total_gallons) + 1
+    total_gallons = math.ceil(total_gallons)
     print ("Final total gallons: " + str(total_gallons) + " Final total price: " + str(total_gallons * cost_per_gallon))
