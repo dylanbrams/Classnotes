@@ -2,7 +2,7 @@
 Pig Latin: put input words into pig latin.
 '''
 vowels = 'aeiouy'
-punctuation = '.,-;: '
+punctuation = '.,-;:\"\'&!\/? '
 input_string = input ('Please enter a word to put into pig latin: ')
 output_string = input_string.lower().strip(punctuation)
 vowel_place = 0
