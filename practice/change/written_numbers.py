@@ -1,61 +1,57 @@
-keep_running = True
-while keep_running:
-#def written_numbers(input_num):
-    print_num = int(input("Please enter your number between 1 and 99:"))
-    print_str = str(print_num) + " "
-    if print_num == 10: print_str += "ten"
-    if print_num == 11: print_str += "eleven"
-    if print_num == 12: print_str += "twelve"
-    if print_num == 13: print_str += "thirteen"
-    if print_num == 14: print_str += "fourteen"
-    if print_num == 15: print_str += "fifteen"
-    if print_num == 16: print_str += "sixteen"
-    if print_num == 17: print_str += "seventeen"
-    if print_num == 18: print_str += "eighteen"
-    if print_num == 19: print_str += "nineteen"
+"""
+Written Numbers:
+    Outputs a written string representing an inputted integer.
+"""
+
+words_lookup = {1: "one", 2: 'two', 3: 'three', 4: 'four', 5: 'five', 6: 'six', 7: 'seven', 8: 'eight', 9: 'nine',
+                10: 'ten', 11: 'eleven', 12: 'twelve', 13: 'thirteen', 14: 'fourteen', 15: 'fifteen',
+                16: 'sixteen', 17: 'seventeen', 18: 'eighteen', 19: 'nineteen',
+                20: 'twenty', 30: 'thirty', 40: 'forty', 50: 'fifty',
+                60: 'sixty', 70: 'seventy', 80: 'eighty', 90: 'ninety'}
+
+def print_single(print_num, words_lookup):
+    """
+    returns a printable string representing a single-word number.  E.G. : 9
+
+    >>> print_single(4, words_lookup)
+    'four'
+    >>> print_single(14, words_lookup)
+    'fourteen'
+
+    :param print_num:
+    :param words_lookup:
+    :return:
+    """
+    print_string = words_lookup[int(print_num)]
+
+    return print_string
+
+def print_two_part(print_num, words_lookup):
+    addition_str = ''
+    ones_place = int(print_num) % 10
+    tens_place = int(print_num // 10) * 10
+    tens_word = words_lookup[tens_place]
+    ones_word = words_lookup[ones_place]
+    addition_str += tens_word + "-" + ones_word
+    return addition_str
+
+def print_number(print_num):
+    print_word = str(print_num) + ' '
+    if (print_num < 21):
+        print_word += print_single(print_num, words_lookup)
+    else:
+        print_word += print_two_part(print_num, words_lookup)
+    print(print_word)
+
+def main():
+    run_again_flag = True
+    while (run_again_flag == True):
+        in_str = input("Please input a numeric string between 1 and 99: ")
+        print_number(int(in_str))
+        run_again = input('Run Again.')
+        if run_again.lower()[:1] != 'y':
+            run_again_flag = False
 
 
-    if (print_num > 19 or print_num < 10):
-        if (print_num // 10 == 2):
-            print_str += "twenty"
-        if (print_num // 10 == 3):
-            print_str += "thirty"
-        if (print_num // 10 == 4):
-            print_str += "forty"
-        if (print_num // 10 == 5):
-            print_str += "fifty"
-        if (print_num // 10 == 6):
-            print_str += "sixty"
-        if (print_num // 10 == 7):
-            print_str += "seventy"
-        if (print_num // 10 == 8):
-            print_str += "eighty"
-        if (print_num // 10 == 9):
-            print_str += "ninety"
-
-        ones_place = print_num % 10
-        if (print_num > 19 and ones_place > 0):
-            print_str += "-"
-
-        if (ones_place == 1):
-            print_str = print_str + "one"
-        elif (ones_place == 2):
-            print_str = print_str + "two"
-        elif (ones_place == 3):
-            print_str = print_str + "three"
-        elif (ones_place == 4):
-            print_str = print_str + "four"
-        elif (ones_place == 5):
-            print_str = print_str + "five"
-        elif (ones_place == 6):
-            print_str = print_str + "six"
-        elif (ones_place == 7):
-            print_str = print_str + "seven"
-        elif (ones_place == 8):
-            print_str = print_str + "eight"
-        elif (ones_place == 9):
-            print_str = print_str + "nine"
-    print (print_str)
-    keep_running_check = input ("Do you want to keep running? (y)")
-    if (keep_running_check != 'y' and keep_running_check != 'Yes'):
-        keep_running = False
+if __name__ == '__main__':
+    main()
