@@ -1,3 +1,4 @@
+
 def point_from_card (card_value):
     '''
     Converts a one-letter card name to a numeric value.
@@ -7,10 +8,8 @@ def point_from_card (card_value):
     face_cards = ('J', 'Q', 'K')
     if (card_value in face_cards):
         return 10
-    if (card_value == 'A'):
-        return 0
-    else:
-        return int(card_value)
+    return 0 if (card_value == 'A') else int(card_value)
+
 def ace_total(current_total, count_aces):
     '''
     Flexes the recommendation for hitting around the possibility that aces are worth either 1 or 11 points.

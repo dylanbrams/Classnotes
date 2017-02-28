@@ -50,7 +50,7 @@ def print_two_part(print_num, words_lookup):
 def print_number(print_num):
     """
     Prints a number (provided as integer) as a word.
-    :param print_num:
+    :param print_num: The number you are going to print.
     :return:
     """
     print_word = str(print_num) + ' '

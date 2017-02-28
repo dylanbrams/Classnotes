@@ -1,4 +1,5 @@
 import math
+SQUARE_FT_PER_GALLON = 375.5
 total_gallons = 0
 more_walls = True
 while (more_walls == True):
@@ -8,7 +9,7 @@ while (more_walls == True):
     number_coats = int(input("Please enter the number of coats of paint: "))
 
     wall_area_painted = wall_height * wall_width * number_coats
-    gallons_this_wall = wall_area_painted / 400
+    gallons_this_wall = wall_area_painted / SQUARE_FT_PER_GALLON
     total_gallons += gallons_this_wall
     print("This wall's area painted: " + str(wall_area_painted))
     print("This wall's gallons of paint: " + str(gallons_this_wall) + "  This wall's price: "

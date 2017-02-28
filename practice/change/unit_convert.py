@@ -4,6 +4,11 @@ Unit Convert:
 """
 class ConversionClass:
     """
+        This class is designed to do conversion of units.  The initial implementation does conversion from
+            various distance units to meters and then can print a target unit value based upon input.
+
+        Initial Version: Dylan Brams, 2/27/2017
+        Current Maintainer: Dylan Brams (2/27/2017)
 
         >>> t=ConversionClass()
         >>> t.convert(1, 'm', 'mi')
