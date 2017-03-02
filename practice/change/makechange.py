@@ -91,9 +91,9 @@ class Change_Set(object):
 
     def denomination_change(self, denomination_amount, value):
         """Returns the count of a particular denomination included in a value."""
-        if value > .01:
+        if denomination_amount > .01:
             return int(value // denomination_amount)
-        elif value == .01:
+        elif denomination_amount == .01:
             # Math around pennies is different because of the errors involved in Python's float calculations.
             return int(round((value * 100),0))
         else:
