@@ -134,9 +134,9 @@ def main():
         #register.make_change(change_running_total)
         money_input = round(float(input
                                   ("What amount would you like dispensed in change?  ")), 2)
-        current_change = Change_Set()
-        current_change.change_amount(money_input)
-        current_change.print_change()
+        CurrentChange = Change_Set()
+        CurrentChange.change_amount(money_input)
+        CurrentChange.print_change()
 
         get_change = input ('Dispense more change.')
         if get_change.lower()[:1] != 'y':

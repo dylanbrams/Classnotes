@@ -1,7 +1,7 @@
 """
 Credit Card Validator - Validates a credit card number according to some weird algorithm that is not standard.
 """
-
+CONTINUE_PROCESSING_CHARACTERS = ['y', 'Y']
 def mult_even_by_two(list_input):
     '''
     Multiplies all the even inputs of the list by two.
@@ -32,8 +32,7 @@ def subtract_nine_when_over_ten(list_input):
     [1, 2, 3, 4, 6, 8, 3]
     """
     list_working = list_input.copy()
-    for i in range(0, len(list_working)):
-        list_working[i] = list_working[i] - 9 if list_working[i] > 9 else list_working[i]
+    list_working = [num - 9 if num > 9 else num for num in list_working]
     return list_working
 
 def check_card_num(card_number_parts):
@@ -69,7 +68,7 @@ def main():
         else:
             print("Failed Checksum")
         run_again = input('Run Again.')
-        if run_again.lower()[:1] != 'y':
+        if run_again.lower() not in CONTINUE_PROCESSING_CHARACTERS:
             run_again_flag = False
 if __name__ == '__main__':
     main()
