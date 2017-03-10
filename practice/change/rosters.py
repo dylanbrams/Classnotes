@@ -2,9 +2,18 @@
 
 CONTINUE_PROCESSING_CHARACTERS = ['y', 'Y']
 class Class_Roster (object):
-    def __init__(self, students, instructor):
-        self.students = students
-        self.instructor = instructor
+    def __init__(self, students_in, instructor_in):
+        """
+        >>> x = Class_Roster([Student('Sydney Sommerfield', 'sydney@sommerfield.com')], Instructor('nimwit', 'dylan@typo.com'))
+        >>> x.__repr__()
+        'Class_Roster([Student(Sydney Sommerfield,sydney@sommerfield.com)], Instructor(nimwit,dylan@typo.com))'
+
+        :param students:
+        :param instructor:
+        """
+        self.students = students_in
+        self.instructor = instructor_in
+
     def __repr__(self):
         # return 'AddressBookEntry({!r}, {!r})'.format(
         #     self.name,
@@ -14,6 +23,7 @@ class Class_Roster (object):
             self.students,
             self.instructor
         ))
+
     def send_class_intro_email(self):
         text = ''
         for curr_student in self.students:
@@ -22,7 +32,6 @@ class Class_Roster (object):
         for curr_student in self.students:
             send_email(curr_student.email_address, text)
         send_email(self.instructor.email_address, text)
-
 
 class Student (object):
     def __init__(self, name, email_address):
@@ -41,7 +50,7 @@ class Instructor (object):
         return ('Instructor(' + self.name + ',' + self.email_address + ')' )
 
 def send_email(email_address, text):
-    print ('Email Sent, text: ' + text)
+    print ('Email Sent, text: "' + text + '"')
 
 def main():
     run_again_flag = True

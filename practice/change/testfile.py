@@ -1,4 +1,5 @@
-
+import math
+import unit_convert
 # Regex processing functions.
 import re
 import itertools
@@ -63,4 +64,11 @@ my_list = [max(len(str(x)) for x in line) for line in zip(*foo)]
 #print (my_list)
 print (foo)
 print (list(zip(*foo)))
+
+radians_angle = (45 * 2 * math.pi) / 360
+x_movement = math.cos(radians_angle)
+y_movement = math.sin(radians_angle)
+print(x_movement)
+print(y_movement)
+x = unit_convert.ConversionClass()
 
