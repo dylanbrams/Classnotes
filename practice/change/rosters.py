@@ -1,5 +1,8 @@
 
 
+import PersonTypes
+
+
 CONTINUE_PROCESSING_CHARACTERS = ['y', 'Y']
 class Class_Roster (object):
     def __init__(self, students_in, instructor_in):
@@ -13,6 +16,23 @@ class Class_Roster (object):
         """
         self.students = students_in
         self.instructor = instructor_in
+
+    def __init__(self, students_in):
+        self.students = students_in
+        self.instructor = PersonTypes.Instructor("", "")
+
+    def __init__(self):
+        return
+
+    def add_students(self, students_in):
+        self.students = students_in
+
+    def add_instructor(self, instructor_in):
+        self.instructor = instructor_in
+
+    # def __init__(self, hand_in):
+    #     for tuple in hand_in:
+    #         hand.add(card(tuple))
 
     def __repr__(self):
         # return 'AddressBookEntry({!r}, {!r})'.format(
@@ -33,33 +53,17 @@ class Class_Roster (object):
             send_email(curr_student.email_address, text)
         send_email(self.instructor.email_address, text)
 
-class Student (object):
-    def __init__(self, name, email_address):
-        self.name = name
-        self.email_address = email_address
-    def __repr__(self):
-        return ('Student(' + self.name + ',' + self.email_address + ')' )
-    def __eq__(self, other):
-        return ((self.name == other.name) and (self.email_address == other.email_address))
-
-class Instructor (object):
-    def __init__(self, name, email_address):
-        self.name = name
-        self.email_address = email_address
-    def __repr__(self):
-        return ('Instructor(' + self.name + ',' + self.email_address + ')' )
-
 def send_email(email_address, text):
     print ('Email Sent, text: "' + text + '"')
 
 def main():
     run_again_flag = True
     while (run_again_flag == True):
-        Sydney = Student('Sydney Sommerfield', 'sydney@sommerfield.com')
-        Justin = Student('Justin Tomlinson', 'justin@tomlinson.com')
-        Dylan = Instructor('nimwit', 'dylan@typo.com')
+        Dylan = PersonTypes.Instructor('nimwit', 'dylan@typo.com')
+        Sydney = PersonTypes.Student('Sydney Sommerfield', 'sydney@sommerfield.com', Dylan)
+        Justin = PersonTypes.Student('Justin Tomlinson', 'justin@tomlinson.com', Dylan)
         Students = [Sydney, Justin]
-        CurrentClass = Class_Roster(Students, Dylan)
+        CurrentClass = Class_Roster(Students)
         print(Students)
         print(Dylan)
         print(CurrentClass)
@@ -67,5 +71,6 @@ def main():
         run_again = input('Run Again.')
         if run_again.lower() not in CONTINUE_PROCESSING_CHARACTERS:
             run_again_flag = False
+
 if __name__ == '__main__':
     main()
