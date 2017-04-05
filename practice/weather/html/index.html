@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Weather</title>
+        <link rel="stylesheet" href="../css/site.css">
+        <script src="../secrets/forecastapikey.js"> </script>
+    </head>
+    <body>
+      <header>
+        <h1>Weather</h1>
+      </header>
+      <main>
+        <div id="map"></div>
+        <footer>
+          <h3 id="location"></h3>
+            <input type="text" id="Longitude" />
+            <input type="text" id="Latitude" />
+          <button id="getForecast">Get Forecast! </button>
+          <p id="forecast"></p>
+        </footer>
+      </main>
+      <script src="https://code.jquery.com/jquery-2.2.3.js"></script>
+      <script src="http://cdn.jsdelivr.net/lodash/4.11.2/lodash.js"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3YT36FmVtV7nKs8KiGT8G96IXzWXCRqA"></script>
+      <script src="../js/site.js"></script>
+    </body>
+</html>

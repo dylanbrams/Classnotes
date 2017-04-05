@@ -1,0 +1,15 @@
+li {
+  list-style: none;
+}
+
+li:before {
+  content: "☞";
+  padding: 1em;
+}
+
+.navbar_link {
+}
+
+#Summary {
+  color: black;
+}
