@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Magic Ride Compare</title>
+        <link rel="stylesheet" href="../css/magicridecompare.css">
+    </head>
+    <body>
+        <header>
+            <h1>This is teh Magic Ride Compare Masheen!</h1>
+        </header>
+        <div class="flex">
+            <nav><img src="../img/llisa33_web-small.gif-c200">
+                <img src="../img/llisa99_web-small.gif-c200">
+            </nav>
+            <article id="buttonarticle">
+                <p><button onclick="doRideCompare()">Run teh Magic Ride Compare Masheen!</button></p>
+                <div id="currloc"></div>
+                <div id="targloc">Targ Lat:
+                <br>Targ Lng:</div>
+                <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+                <div id="map"></div>
+                <img src="../img/sparklystarnew.gif">
+                <img src="../img/floorAni6.gif-c200">
+            </article>
+        </div>
+        <footer>
+            <img src="../img/flashingstars.gif">
+            <img src="../img/starfield.gif">
+        </footer>
+    </body>
+    <script src="https://code.jquery.com/jquery-2.2.3.js"></script>
+    <script src="http://cdn.jsdelivr.net/lodash/4.11.2/lodash.js"></script>
+    <script src="../js/magicridecompare.js"></script>
+    <script src="../js/mapsearch.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3YT36FmVtV7nKs8KiGT8G96IXzWXCRqA&libraries=places&callback=initAutocomplete"
+            async defer></script>
+</html>
