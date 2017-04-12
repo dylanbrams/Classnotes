@@ -11,7 +11,7 @@ function latLongAlert(myLatLong) {
 
 var output = document.getElementById('out');
 
-var myLatLong = getPosition().then(function(position) {
+getPosition().then(function(position) {
   var latitude  = position.coords.latitude;
   var longitude = position.coords.longitude;
 
@@ -23,12 +23,9 @@ var myLatLong = getPosition().then(function(position) {
     latitude + ',' + longitude + '&zoom=13&size=300x300&sensor=false';
 
   output.appendChild(img);
-  console.log(output);
-  latLongAlert(latitude, longitude);
   return [latitude, longitude];
 }).catch(function(err) {
   output.innerHTML = 'Unable to retrieve your location';
   console.log(err);
 });
 
-alert(myLatLong);

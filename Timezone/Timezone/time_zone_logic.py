@@ -8,7 +8,8 @@ class TimezoneFuncs(object):
     def __init__(self):
         self.server_lat = 45.589
         self.server_lng = -122.59
-
+        # Example format: 2016-08-25T17:27:45.556703+00:00
+        self.timeformat = 'YYYY-MM-DDTHH:mm:ss'
     def get_time_at_server(self):
         """
         takes a lat / lng.  Returns a time.
@@ -20,7 +21,7 @@ class TimezoneFuncs(object):
 
         tz = tzwhere.tzwhere()
         mytz = tz.tzNameAt(self.server_lat, self.server_lng)
-        loc_time = arrow.get(datetime.now(), mytz)
+        loc_time = arrow.get(datetime.now(), mytz).st
         return loc_time
 
     def get_time_at_lat_lng(self, lat, lng):
