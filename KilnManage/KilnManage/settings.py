@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'KilnManage.urls'
+ROOT_URLCONF = 'KilnData.urls'
 
 TEMPLATES = [
     {
@@ -119,6 +119,9 @@ USE_L10N = True
 
 USE_TZ = True
 
+# note: I used the tutorial here:
+# https://simpleisbetterthancomplex.com/tutorial/2016/06/27/how-to-use-djangos-built-in-login-system.html
+LOGIN_REDIRECT_URL = 'home'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
