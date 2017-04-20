@@ -5,7 +5,7 @@ import os
 from KilnData import models
 from django.http import HttpResponse
 from django.shortcuts import render
-
+from KilnData import KilnDataLogic
 
 def add_kiln(_, kiln_name_in):
     new_kiln = models.Kiln()
@@ -13,6 +13,30 @@ def add_kiln(_, kiln_name_in):
     new_kiln.save()
     return HttpResponse(new_kiln.__repr__());
     #return HttpResponse(kiln_name_in)
+
+
+def add_update_kiln_data(request):
+    print("Look!  It's a Console Printing!")
+    form_data = {
+        'kiln_id' : request.POST['kiln_id'],
+        'kiln_name' : request.POST['kiln_name'],
+    }
+    KilnDataLogic.add_modify_kiln_data(form_data)
+
+    return HttpResponse
+
+def view_kiln_data(request, kiln_id_in):
+    this_kiln = models.Kiln.objects\
+        .filter(kiln_id= kiln_id_in)
+    template_arguments = {}
+    if (this_kiln is not None):
+        if (this_kiln.count() > 0):
+            template_arguments = {
+                'kiln_id' : this_kiln[0].kiln_id,
+                'kiln_name' : this_kiln[0].kiln_name,
+            }
+    return render(request, './add_modify_kiln.html', template_arguments)
+
 
 def view_kiln(request, kiln_name_in):
     this_kiln = models.Kiln.objects\
@@ -23,7 +47,9 @@ def view_kiln(request, kiln_name_in):
     return render(request, './view_kiln.html', template_arguments)
 
 def home (request):
-    template_arguments = {}
+    template_arguments = {
+
+    }
     return render(request, './home.html', template_arguments)
 
 def view_env_test(request):

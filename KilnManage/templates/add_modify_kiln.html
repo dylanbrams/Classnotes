@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}Add / Modify Kiln Initial{% endblock %}
+
+{% block content %}
+  <form id="frmKilnData" action="{% url 'add_update_kiln_data' %}" method="post"
+        enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="hidden" name="kiln_id">
+    <input type="text" name="kiln_name" />
+    <input type="submit" />
+
+  </form>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'KilnData/ajax_csrf_setup.js' %}"></script>
+<script src="{% static 'KilnData/submitKilnData.js' %}"></script>
+{% endblock %}

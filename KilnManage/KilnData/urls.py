@@ -21,6 +21,8 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^(?P<kiln_name_in>.+)/add_kiln/', views.add_kiln, name='add_kiln'),
+    url(r'^add_update_kiln_data', views.add_update_kiln_data, name='add_update_kiln_data'),
+    url(r'^(?P<kiln_id_in>.+)/view_kiln_data/', views.view_kiln_data, name='view_kiln_data'),
     url(r'^(?P<kiln_name_in>.+)/view_kiln/', views.view_kiln, name='view_kiln'),
     url(r'^view_env_test/', views.view_env_test, name='helloworld'),
     url(r'^login/$', auth_views.login, name='login'),
