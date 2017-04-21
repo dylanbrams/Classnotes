@@ -18,7 +18,7 @@ class UserProfile(models.Model):
 
 class Program(models.Model):
     program_id = models.AutoField(primary_key=True)
-    name = models.TextField()
+    program_name = models.TextField()
     program_type = models.TextField()
 
     def __str__(self):
