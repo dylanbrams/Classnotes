@@ -2,18 +2,18 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class UserProfile(models.Model):
+class KilnUserProfile(models.Model):
+    kiln_user_profile_id = models.AutoField(primary_key=True)
     user = models.ForeignKey(User)
-    userprofile_id = models.AutoField(primary_key=True)
     temperature_display_units = models.CharField(default='C', max_length=1)
 
     def __str__(self):
-        return str(self.userprofile_id)
+        return str(self.kiln_user_profile_id)
 
     def __repr__(self):
         return 'UserProfile(user={!r}, userprofile_id={!r}))'.format(
             self.user,
-            self.userprofile_id,
+            self.kiln_user_profile_id,
         )
 
 class Program(models.Model):
@@ -22,11 +22,11 @@ class Program(models.Model):
     program_type = models.TextField()
 
     def __str__(self):
-        return self.name
+        return self.program_name
 
     def __repr__(self):
         return 'Program(name={!r}, program_type={!r})'.format(
-            self.name,
+            self.program_name,
             self.program_type,
         )
 
@@ -42,37 +42,65 @@ class Kiln(models.Model):
             self.kiln_name,
         )
 
-class AdminType(models.Model):
-    admintype_id = models.AutoField(primary_key=True)
-    admintype_name = models.TextField()
-
-
 
 class ProgramStep(models.Model):
     programstep_id = models.AutoField(primary_key=True)
-    program_id = models.ForeignKey(Program)
+    program = models.ForeignKey(Program, related_name='Program_Steps')
     seconds = models.IntegerField()
     temperature_in_c = models.DecimalField(max_digits=5, decimal_places=2)
 
-class jt_Kiln_Admin:
+    def __str__(self):
+        return str(self.programstep_id) + " : part of " + self.program.program_name
+
+    def __repr__(self):
+        return 'AdminType(programstep_id={!r}, program={!r}, seconds={!r}, temperature_in_c={!r})'.format(
+            self.programstep_id,
+            self.program,
+            self.seconds,
+            self.temperature_in_c
+        )
+
+class KilnAdminType(models.Model):
+    kilnadmintype_id = models.AutoField(primary_key=True)
+    kilnadmintype_name = models.TextField()
+
+    def __str__(self):
+        return self.kilnadmintype_name
+
+    def __repr__(self):
+        return 'AdminType(admintype_name={!r})'.format(
+            self.kilnadmintype_name,
+        )
+
+class jt_Kiln_Admin(models.Model):
     kiln_admin_id = models.AutoField(primary_key=True)
-    kiln_id = models.ForeignKey(Kiln)
-    userprofile_id = models.ForeignKey(UserProfile)
-    admintype_id = models.ForeignKey(AdminType)
+    kiln = models.ForeignKey(Kiln, related_name='kiln_admin_id')
+    userprofile = models.ForeignKey(KilnUserProfile, related_name='kiln_admin_id')
+    kilnadmintype = models.ForeignKey(KilnAdminType, related_name='kiln_admin_id')
     def __str__(self):
         return self.kiln_admin_id
 
     def __repr__(self):
-        return 'Kiln(kiln_admin_id={!r}, kiln_id={!r}, kiln_user_id={!r})'.format(
+        return 'Kiln(kiln_admin_id={!r}, kiln={!r}, userprofile={!r}, kiln_admin_type={!r})'.format(
             self.kiln_admin_id,
-            self.kiln_id,
-            self.user_id,
-            self.admin_type
+            self.kiln,
+            self.userprofile,
+            self.kiln_admin_type
         )
 
-class jt_Kiln_Program:
+class jt_Kiln_Program(models.Model):
     kiln_program_id = models.AutoField(primary_key=True)
-    kiln_id = models.ForeignKey(Kiln)
-    userprofile_id = models.ForeignKey(UserProfile)
-    program_id = models.ForeignKey(Program)
+    kiln = models.ForeignKey(Kiln, related_name='Kiln_program')
+    userprofile = models.ForeignKey(KilnUserProfile, related_name='userprofile_id')
+    program = models.ForeignKey(Program, related_name='Kiln_program')
 
+    def __str__(self):
+        return self.kiln_program_id
+
+    def __repr__(self):
+        return 'Kiln(kiln_program_id={!r}, kiln={!r}, userprofile={!r}, program={!r})'.format(
+            self.kiln_program_id,
+            self.kiln,
+            self.userprofile,
+            self.program
+        )

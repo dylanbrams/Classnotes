@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'KilnData.apps.KilndataConfig',
+    'KilnRestAPI',
     'KilnManage'
 ]
 
@@ -51,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'KilnData.urls'
+ROOT_URLCONF = 'KilnManage.urls'
 
 TEMPLATES = [
     {
@@ -86,6 +88,12 @@ DATABASES = {
         'PORT': '5432'}
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAdminUser',
+    ],
+    'PAGE_SIZE': 10
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
