@@ -25,7 +25,7 @@ SECRET_KEY = 'g5&5#sf=#p$pqm9eb)hlplka2)&-(g6kp$=0pq(gpn3zu1l@#2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'KilnData.apps.KilndataConfig',
     'KilnRestAPI',
-    'KilnManage'
+    'KilnManage',
+    'silk'
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'silk.middleware.SilkyMiddleware',
 ]
 
 ROOT_URLCONF = 'KilnManage.urls'

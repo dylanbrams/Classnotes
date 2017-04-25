@@ -1,7 +1,7 @@
-from django.db import models
+from KilnData import models
 
 def add_modify_kiln_data(in_dict):
-    #
+    # Adds or modifies Kiln data.
     kiln_id = in_dict["kiln_id"]
     this_kiln = models.Kiln.objects.filter(kiln_id = kiln_id)
     if this_kiln.count() == 0:
@@ -9,10 +9,11 @@ def add_modify_kiln_data(in_dict):
         this_kiln.name = in_dict["kiln_name"]
         this_kiln.Save()
     else:
-        this_kiln.name = in_dict["kiln_name"]
+        this_kiln.update(kiln_name= in_dict["kiln_name"])
     return False
 
 def add_modify_program_data(in_dict):
+    # Adds or modifies Program data.
     #
     program_id = in_dict["program_id"]
     this_program = models.Program.objects.filter(program_id = program_id)

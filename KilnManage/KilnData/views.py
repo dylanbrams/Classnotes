@@ -23,7 +23,7 @@ def add_update_kiln_data(request):
     }
     KilnDataLogic.add_modify_kiln_data(form_data)
 
-    return HttpResponse
+    return HttpResponse("Kiln Updated.")
 
 def view_kiln_data(request, kiln_id_in):
     this_kiln = models.Kiln.objects\

@@ -30,19 +30,6 @@ class Program(models.Model):
             self.program_type,
         )
 
-class Kiln(models.Model):
-    kiln_id = models.AutoField(primary_key=True)
-    kiln_name = models.TextField()
-
-    def __str__(self):
-        return self.kiln_name
-
-    def __repr__(self):
-        return 'Kiln(kiln_name={!r})'.format(
-            self.kiln_name,
-        )
-
-
 class ProgramStep(models.Model):
     programstep_id = models.AutoField(primary_key=True)
     program = models.ForeignKey(Program, related_name='Program_Steps')
@@ -60,6 +47,18 @@ class ProgramStep(models.Model):
             self.temperature_in_c
         )
 
+class Kiln(models.Model):
+    kiln_id = models.AutoField(primary_key=True)
+    kiln_name = models.TextField()
+
+    def __str__(self):
+        return self.kiln_name
+
+    def __repr__(self):
+        return 'Kiln(kiln_name={!r})'.format(
+            self.kiln_name,
+        )
+
 class KilnAdminType(models.Model):
     kilnadmintype_id = models.AutoField(primary_key=True)
     kilnadmintype_name = models.TextField()
@@ -68,39 +67,39 @@ class KilnAdminType(models.Model):
         return self.kilnadmintype_name
 
     def __repr__(self):
-        return 'AdminType(admintype_name={!r})'.format(
+        return 'AdminType(kilnadmintype_name={!r})'.format(
             self.kilnadmintype_name,
         )
 
 class jt_Kiln_Admin(models.Model):
     kiln_admin_id = models.AutoField(primary_key=True)
     kiln = models.ForeignKey(Kiln, related_name='kiln_admin_id')
-    userprofile = models.ForeignKey(KilnUserProfile, related_name='kiln_admin_id')
+    user = models.ForeignKey(User, related_name='kiln_admin_id')
     kilnadmintype = models.ForeignKey(KilnAdminType, related_name='kiln_admin_id')
     def __str__(self):
         return self.kiln_admin_id
 
     def __repr__(self):
-        return 'Kiln(kiln_admin_id={!r}, kiln={!r}, userprofile={!r}, kiln_admin_type={!r})'.format(
+        return 'Kiln(kiln_admin_id={!r}, kiln={!r}, user={!r}, kilnadmintype={!r})'.format(
             self.kiln_admin_id,
             self.kiln,
-            self.userprofile,
-            self.kiln_admin_type
+            self.user,
+            self.kilnadmintype
         )
 
 class jt_Kiln_Program(models.Model):
     kiln_program_id = models.AutoField(primary_key=True)
     kiln = models.ForeignKey(Kiln, related_name='Kiln_program')
-    userprofile = models.ForeignKey(KilnUserProfile, related_name='userprofile_id')
+    user = models.ForeignKey(User, related_name='Kiln_program')
     program = models.ForeignKey(Program, related_name='Kiln_program')
 
     def __str__(self):
         return self.kiln_program_id
 
     def __repr__(self):
-        return 'Kiln(kiln_program_id={!r}, kiln={!r}, userprofile={!r}, program={!r})'.format(
+        return 'Kiln(kiln_program_id={!r}, kiln={!r}, user={!r}, program={!r})'.format(
             self.kiln_program_id,
             self.kiln,
-            self.userprofile,
+            self.user,
             self.program
         )
