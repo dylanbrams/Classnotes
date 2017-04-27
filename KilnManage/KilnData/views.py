@@ -14,6 +14,9 @@ def add_kiln(_, kiln_name_in):
     return HttpResponse(new_kiln.__repr__());
     #return HttpResponse(kiln_name_in)
 
+def add_program(request):
+    return render(request, './add_program.html')
+
 
 def add_update_kiln_data(request):
     # add a kiln or update a kiln's data.

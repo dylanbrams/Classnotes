@@ -32,9 +32,13 @@ class Program(models.Model):
 
 class ProgramStep(models.Model):
     programstep_id = models.AutoField(primary_key=True)
-    program = models.ForeignKey(Program, related_name='Program_Steps')
-    seconds = models.IntegerField()
-    temperature_in_c = models.DecimalField(max_digits=5, decimal_places=2)
+    program = models.ForeignKey(Program, related_name='program_steps', on_delete=models.CASCADE)
+    order = models.IntegerField()
+    seconds = models.DecimalField(max_digits=7, decimal_places=2)
+    temperature_in_c = models.DecimalField(max_digits=12, decimal_places=3)
+
+    class Meta:
+        unique_together = ('program', 'order')
 
     def __str__(self):
         return str(self.programstep_id) + " : part of " + self.program.program_name
@@ -43,6 +47,7 @@ class ProgramStep(models.Model):
         return 'AdminType(programstep_id={!r}, program={!r}, seconds={!r}, temperature_in_c={!r})'.format(
             self.programstep_id,
             self.program,
+            self.order,
             self.seconds,
             self.temperature_in_c
         )

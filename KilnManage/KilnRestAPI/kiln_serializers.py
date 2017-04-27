@@ -8,15 +8,17 @@ class KilnUserProfileSerializer(serializers.HyperlinkedModelSerializer):
         model = KilnModels.KilnUserProfile
         fields = ('url','temperature_display_units','user')
 
+class ProgramStepSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = KilnModels.ProgramStep
+        fields = ('url', 'program', 'seconds', 'order', 'temperature_in_c')
+
 class ProgramSerializer(serializers.HyperlinkedModelSerializer):
+    #program_steps = ProgramStepSerializer(many=True)
     class Meta:
         model = KilnModels.Program
         fields = ('url', 'program_name', 'program_type')
 
-class ProgramStepSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = KilnModels.ProgramStep
-        fields = ('url', 'program', 'seconds', 'temperature_in_c')
 
 class KilnSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
