@@ -9,7 +9,7 @@ class TimezoneFuncs(object):
         self.server_lat = 45.589
         self.server_lng = -122.59
         # Example format: 2016-08-25T17:27:45.556703+00:00
-        self.tz = tzwhere.tzwhere()
+        self.tz = tzwhere.tzwhere(shapely=False)
         self.timeformat = 'YYYY-MM-DDTHH:mm:ss.SSSSSSZZ'
         self.server_tz = self.tz.tzNameAt(self.server_lat, self.server_lng)
 
@@ -18,7 +18,6 @@ class TimezoneFuncs(object):
         takes a lat / lng.  Returns a time.
         #>>> TimezoneFuncs().get_time_at_server()
         #'2017-04-12T14:09:48.594734-07:00'
-        
         
         """
         loc_time = arrow.get(datetime.now(), self.server_tz).format(self.timeformat)

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'KilnData.apps.KilndataConfig',
     'KilnRestAPI',
     'KilnManage',
+    'rest_framework.authtoken',
     'silk'
 ]
 

@@ -27,14 +27,13 @@ def add_update_kiln_data(request):
 
 def view_kiln_data(request, kiln_id_in):
     this_kiln = models.Kiln.objects\
-        .filter(kiln_id= kiln_id_in)
+        .get(kiln_id= kiln_id_in)
     template_arguments = {}
     if (this_kiln is not None):
-        if (this_kiln.count() > 0):
-            template_arguments = {
-                'kiln_id' : this_kiln[0].kiln_id,
-                'kiln_name' : this_kiln[0].kiln_name,
-            }
+        template_arguments = {
+            'kiln_id' : this_kiln.kiln_id,
+            'kiln_name' : this_kiln.kiln_name,
+        }
     return render(request, './add_modify_kiln.html', template_arguments)
 
 
