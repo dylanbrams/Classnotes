@@ -21,6 +21,7 @@ class Program(models.Model):
     program_name = models.TextField()
     program_type = models.TextField()
 
+
     def __str__(self):
         return self.program_name
 
@@ -91,6 +92,24 @@ class jt_Kiln_Admin(models.Model):
             self.user,
             self.kilnadmintype
         )
+
+class jt_Program_Admin(models.Model):
+    program_admin_id = models.AutoField(primary_key=True)
+    program = models.ForeignKey(Program, related_name='program_admin_id')
+    user = models.ForeignKey(User, related_name='program_admin_id')
+    kilnadmintype = models.ForeignKey(KilnAdminType, related_name='program_admin_id')
+
+    def __str__(self):
+        return self.program_admin_id
+
+    def __repr__(self):
+        return 'Kiln(kiln_admin_id={!r}, kiln={!r}, user={!r}, kilnadmintype={!r})'.format(
+            self.program_admin_id,
+            self.program,
+            self.user,
+            self.kilnadmintype
+        )
+
 
 class jt_Kiln_Program(models.Model):
     kiln_program_id = models.AutoField(primary_key=True)

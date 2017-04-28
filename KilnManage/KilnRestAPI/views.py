@@ -1,18 +1,12 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
 from rest_framework.views import APIView
 from KilnRestAPI.user_serializers import UserSerializer, GroupSerializer
 from KilnData.models import KilnUserProfile, Program, ProgramStep, Kiln, KilnAdminType, jt_Kiln_Admin, jt_Kiln_Program
 from KilnRestAPI.kiln_serializers import KilnUserProfileSerializer, ProgramSerializer, ProgramStepSerializer, \
-    KilnSerializer, KilnAdminTypeSerializer, jt_Kiln_AdminSerializer, jt_Kiln_ProgramSerializer
-
-
-class GeneralKilnView(APIView):
-    queryset = User.objects.all().order_by('date_joined')
-    serializer_class = UserSerializer
-    pass
-
+    KilnSerializer, KilnAdminTypeSerializer, jt_Kiln_AdminSerializer, jt_Kiln_ProgramSerializer, KilnLimitedSerializer
+from KilnRestAPI.permissions import CanModifyObject
 
 # <editor-fold desc="StandardCRUD">
 
@@ -89,3 +83,15 @@ class jt_Kiln_ProgramViewSet(viewsets.ModelViewSet):
 
 
 # </editor-fold desc="StandardCRUD">
+
+class PublicKilnView(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Kiln.objects.all().order_by('kiln_id')
+    serializer_class = KilnLimitedSerializer
+    permission_classes = (CanModifyObject, )
+
+    def perform_create(self, serializer):
+        serializer.save()
+        kiln_admin = jt_Kiln_AdminViewSet()

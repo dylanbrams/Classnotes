@@ -22,7 +22,7 @@ from KilnRestAPI import views as rest_API_views
 
 
 router = routers.DefaultRouter()
-router.register(r'kilnedits', rest_API_views.GeneralKilnView)
+router.register(r'kilnedits', rest_API_views.PublicKilnView)
 
 # Basic CRUD operations with standard REST API
 router.register(r'users', rest_API_views.UserViewSet)
