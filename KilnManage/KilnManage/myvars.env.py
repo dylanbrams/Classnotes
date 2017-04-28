@@ -1,0 +1,1 @@
+amazon_key = 'abc123'
