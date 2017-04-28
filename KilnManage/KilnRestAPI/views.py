@@ -6,7 +6,7 @@ from KilnRestAPI.user_serializers import UserSerializer, GroupSerializer
 from KilnData.models import KilnUserProfile, Program, ProgramStep, Kiln, KilnAdminType, jt_Kiln_Admin, jt_Kiln_Program
 from KilnRestAPI.kiln_serializers import KilnUserProfileSerializer, ProgramSerializer, ProgramStepSerializer, \
     KilnSerializer, KilnAdminTypeSerializer, jt_Kiln_AdminSerializer, jt_Kiln_ProgramSerializer, KilnLimitedSerializer
-from KilnRestAPI.permissions import CanModifyObject
+from KilnRestAPI.permissions import CanViewModifyObject
 
 # <editor-fold desc="StandardCRUD">
 
@@ -90,7 +90,7 @@ class PublicKilnView(viewsets.ModelViewSet):
     """
     queryset = Kiln.objects.all().order_by('kiln_id')
     serializer_class = KilnLimitedSerializer
-    permission_classes = (CanModifyObject, )
+    permission_classes = (CanViewModifyObject,)
 
     def perform_create(self, serializer):
         serializer.save()

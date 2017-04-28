@@ -1,0 +1,23 @@
+Core:
+    Front End
+        Secure front end for CRUD
+        Admin
+        Hook up Program
+        Actual front-end interface
+            Angular.
+            Graph-based input
+            Single Page
+
+    Tests for security of programs and kilns
+
+Additional Functionality:
+    Add Firings
+        Images
+        Object types
+        Object thicknesses
+        Object materials
+        Glazes
+        Colors
+        Firing Success Ratings
+    Private Kilns / Firings
+    Migrations

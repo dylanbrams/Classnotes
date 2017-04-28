@@ -7,6 +7,7 @@
     <input type="text" name="kiln_name" value="{{kiln_name}}" />
     {% csrf_token %}
     <button id="sendkilndata" > Update! </button>
+    <div name="message"> </div>
 {% endblock %}
 
 {% block scripts %}
@@ -18,22 +19,35 @@ function csrfSafeMethod(method) {
     // these HTTP methods do not require CSRF protection
     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
 }
-$("#sendkilndata").click(function(){
-        var data = {};
-        data.kiln_name = $("[name=kiln_name]").val();
-        var csrftoken = $("[name=csrfmiddlewaretoken]").val();
-        $.ajax({
-                type: "PUT",
-                url: "/api/kiln/" + $("[name=kiln_id]").val() + "/",
-                contentType: "application/json;",
-                data: JSON.stringify(data),
-                dataType: "json",
-                beforeSend: function(xhr, settings) {
-                      if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                              xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                   }},
-            }).error(function(r){ console.log(r) })
-            .success(function(r){ console.log("success", r) })
-        });
+$("#sendkilndata").click(function() {
+    var data = {};
+    data.kiln_name = $("[name=kiln_name]").val();
+    var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+    $.ajax({
+        type: "PUT",
+        url: "/api/kiln/" + $("[name=kiln_id]").val() + "/",
+        contentType: "application/json;",
+        data: JSON.stringify(data),
+        dataType: "json",
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        },
+        success: function (data) {
+            if (data) {   // DO SOMETHING
+                var message = "Kiln Name Set To: " + data.kiln_name;
+                $("[name=message]").text(message);
+            } else {
+            }
+        },
+        error: function (data) {
+            if (data) {
+                var message = "Error! " + data.error();
+                $("[name=message]").text(message);
+            }
+        }
+    });
+});
 </script>
 {% endblock %}
