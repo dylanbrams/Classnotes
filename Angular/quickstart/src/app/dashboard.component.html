@@ -1,0 +1,8 @@
+<h3>Top Kilns</h3>
+<div class="grid grid-pad">
+  <div *ngFor="let kiln of kilns" [routerLink]="['/detail',kiln.id]" class="col-1-4">
+    <div class="module kiln">
+      <h4>{{kiln.name}}</h4>
+    </div>
+  </div>
+</div>

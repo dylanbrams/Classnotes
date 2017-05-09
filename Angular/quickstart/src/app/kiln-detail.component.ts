@@ -1,24 +1,31 @@
 /**
  * Created by ThinkPad on 5/8/2017.
  */
-import { Component, Input } from '@angular/core';
-import { Kiln } from './kiln';
-
-
+import { Component, Input, OnInit }         from '@angular/core';
+import { ActivatedRoute, Params }   from '@angular/router';
+import { Location }                 from '@angular/common';
+import { Kiln }                     from './kiln';
+import { KilnService }              from './kiln.service';
+import 'rxjs/add/operator/switchMap';
 
 @Component({
   selector: 'kiln-detail',
-  template: `
-    <div *ngIf="kiln">
-      <h2>{{kiln.name}} details!</h2>
-      <div><label>id: </label>{{kiln.id}}</div>
-      <div>
-        <label>name: </label>
-        <input [(ngModel)]="kiln.name" placeholder="name"/>
-      </div>
-    </div>
-  `
+  templateUrl: `./kiln-detail.component.html`
 })
-export class KilnDetailComponent {
+export class KilnDetailComponent implements OnInit {
   @Input() kiln: Kiln;
+  constructor(
+      private kilnService: KilnService,
+      private route: ActivatedRoute,
+      private location: Location
+  ) {}
+
+  ngOnInit(): void {
+    this.route.params
+      .switchMap((params: Params) => this.kilnService.getKiln(+params['id']))
+      .subscribe(kiln => this.kiln = kiln);
+  }
+  goBack(): void {
+    this.location.back();
+  }
 }

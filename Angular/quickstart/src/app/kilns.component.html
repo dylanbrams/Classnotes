@@ -1,0 +1,13 @@
+<ul class="kilns">
+  <li *ngFor="let current_kiln of kilns"
+    [class.selected]="current_kiln === selectedKiln"
+    (click)="onSelectKiln(current_kiln)">
+    <span class="badge">{{current_kiln.id}}</span> {{current_kiln.name}}
+  </li>
+</ul>
+<div *ngIf="selectedKiln">
+  <h2>
+    {{selectedKiln.name | uppercase}} is my kiln
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>
