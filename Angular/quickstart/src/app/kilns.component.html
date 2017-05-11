@@ -2,12 +2,12 @@
   <li *ngFor="let current_kiln of kilns"
     [class.selected]="current_kiln === selectedKiln"
     (click)="onSelectKiln(current_kiln)">
-    <span class="badge">{{current_kiln.id}}</span> {{current_kiln.name}}
+    <span class="badge">{{current_kiln.kiln_id}}</span> {{current_kiln.kiln_name}}
   </li>
 </ul>
 <div *ngIf="selectedKiln">
   <h2>
-    {{selectedKiln.name | uppercase}} is my kiln
+    {{selectedKiln.kiln_name | uppercase}} is my kiln
   </h2>
   <button (click)="gotoDetail()">View Details</button>
 </div>

@@ -22,7 +22,7 @@ export class KilnDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params
-      .switchMap((params: Params) => this.kilnService.getKiln(+params['id']))
+      .switchMap((params: Params) => this.kilnService.getKiln(+params['kiln_id']))
       .subscribe(kiln => this.kiln = kiln);
   }
   goBack(): void {

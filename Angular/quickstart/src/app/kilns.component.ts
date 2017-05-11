@@ -27,7 +27,7 @@ export class KilnsComponent implements OnInit {
     this.selectedKiln = kiln;
   }
   gotoDetail(): void {
-    this.router.navigate(['/detail', this.selectedKiln.id]);
+    this.router.navigate(['/detail', this.selectedKiln.kiln_id]);
 }
 }
 

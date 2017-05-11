@@ -1,9 +1,9 @@
     <div *ngIf="kiln">
-      <h2>{{kiln.name}} details!</h2>
-      <div><label>id: </label>{{kiln.id}}</div>
+      <h2>{{kiln.kiln_name}} details!</h2>
+      <div><label>id: </label>{{kiln.kiln_id}}</div>
       <div>
         <label>name: </label>
-        <input [(ngModel)]="kiln.name" placeholder="name"/>
+        <input [(ngModel)]="kiln.kiln_name" placeholder="name"/>
       </div>
       <button (click)="goBack()">Back</button>
     </div>

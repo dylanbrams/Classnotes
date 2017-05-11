@@ -29,7 +29,7 @@ var KilnsComponent = (function () {
         this.selectedKiln = kiln;
     };
     KilnsComponent.prototype.gotoDetail = function () {
-        this.router.navigate(['/detail', this.selectedKiln.id]);
+        this.router.navigate(['/detail', this.selectedKiln.kiln_id]);
     };
     return KilnsComponent;
 }());

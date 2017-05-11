@@ -12,10 +12,9 @@ import { KilnService } from './kiln.service';
 
 })
 export class DashboardComponent implements OnInit {
-
-  kilns: Kiln[] = [];
+  kilns: Object[] = [];
   constructor(private kilnService: KilnService) {}
   ngOnInit(): void {
-    this.kilnService.getKilns().then(kilns => this.kilns = kilns.slice(0, 4));
+    this.kilnService.getKilns().then(kilns => this.kilns = kilns);
   }
 }

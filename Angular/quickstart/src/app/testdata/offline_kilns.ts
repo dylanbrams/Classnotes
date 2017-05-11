@@ -4,10 +4,10 @@
 import { Kiln } from '../kiln';
 
 export const KILNS: Kiln[] = [
-  { id: 11, name: 'Dylan\'s First Kiln'},
-  { id: 12, name: 'Lena\'s first Kiln' },
-  { id: 13, name: 'Another Kiln' },
-  { id: 14, name: 'A boring Kiln' },
-  { id: 15, name: 'An exciting Kiln' },
-  { id: 16, name: 'A big Kiln' },
+  { kiln_id: 11, kiln_name: 'Dylan\'s First Kiln'},
+  { kiln_id: 12, kiln_name: 'Lena\'s first Kiln' },
+  { kiln_id: 13, kiln_name: 'Another Kiln' },
+  { kiln_id: 14, kiln_name: 'A boring Kiln' },
+  { kiln_id: 15, kiln_name: 'An exciting Kiln' },
+  { kiln_id: 16, kiln_name: 'A big Kiln' },
 ];
