@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}Add / Modify Kiln User Profile{% endblock %}
+
+{% block content %}
+    <select name="temperature_display_units" value="{{current_user_temp_display}}">
+        <option value='C'>Degrees Celsius (default)</option>
+        <option value='F'>Degrees Fahrenheit</option>
+    </select>
+    <select name="kiln" value={{current_kiln}}>
+    {%  for entry in kilns %}
+        <option value="{{ entry.kiln_id }}">{{ entry.kiln_name }}</option>
+    {%  endfor %}
+    </select>
+    {% csrf_token %}
+    <button id="sendprofiledata" > Update! </button>
+    <div name="message"> </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+/**
+ * Created by Dylan Brams on 4/25/2017.
+ */
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$("#sendprofiledata").click(function() {
+    var data = {};
+    data.temperature_display_units = $("[name=temperature_display_units]").val();
+    data.kiln = $("[name=kiln]").val();
+    var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+    $.ajax({
+        type: "POST",
+        url: "/api/kilnuserprofilepublic/",
+        contentType: "application/json;",
+        data: JSON.stringify(data),
+        dataType: "json",
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        },
+        success: function (data) {
+            if (data) {   // DO SOMETHING
+                var message = "Kiln User Profile Updated";
+                $("[name=message]").text(message);
+            } else {
+            }
+        },
+        error: function (data) {
+            if (data) {
+                var message = "Error! " + data.error();
+                $("[name=message]").text(message);
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

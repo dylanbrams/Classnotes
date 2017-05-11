@@ -24,7 +24,8 @@ class CanViewModifyObject(permissions.BasePermission):
             return True
 
         # Modifying Administration / Ownership is only allowed if the user is Owner of the object.
-        admin_type_ids = KilnAdminType.objects.filter(kilnadmintype_name__in=('Owner', 'Manager')).values_list('kilnadmintype_id')
+        admin_type_ids = KilnAdminType.objects.filter(kilnadmintype_name__in=('Owner', 'Manager'))\
+            .values_list('kilnadmintype_id')
         if ('/kilnedits/' in request.path):
             return (jt_Kiln_Admin.objects.filter(user=request.user, kiln_id=obj.kiln_id,
                                                  kilnadmintype__in=admin_type_ids).count() > 0)
@@ -32,7 +33,7 @@ class CanViewModifyObject(permissions.BasePermission):
             return (jt_Program_Admin.objects.filter(user=request.user, program_id=obj.program_id,
                                                            kilnadmintype__in=admin_type_ids).count() > 0)
 
-        # Changing permissions are only allowed if the user is Owner of the object.
+        # Changing permissions are only allowed if the user is Owner of the object.xxx
         owner_type_id = KilnAdminType.objects.filter(kilnadmintype_name__in=('Owner')).values_list('kilnadmintype_id')
         if ('/kilnadminedits/' in request.path):
             return (jt_Kiln_Admin.objects.filter(user=request.user, kiln_id=obj.kiln_id,

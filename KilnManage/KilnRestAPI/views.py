@@ -5,7 +5,8 @@ from rest_framework.views import APIView
 from KilnRestAPI.user_serializers import UserSerializer, GroupSerializer
 from KilnData.models import KilnUserProfile, Program, ProgramStep, Kiln, KilnAdminType, jt_Kiln_Admin, jt_Kiln_Program
 from KilnRestAPI.kiln_serializers import KilnUserProfileSerializer, ProgramSerializer, ProgramStepSerializer, \
-    KilnSerializer, KilnAdminTypeSerializer, jt_Kiln_AdminSerializer, jt_Kiln_ProgramSerializer, KilnLimitedSerializer
+    KilnSerializer, KilnAdminTypeSerializer, jt_Kiln_AdminSerializer, jt_Kiln_ProgramSerializer, KilnLimitedSerializer, \
+    KilnUserProfilePublicSerializer
 from KilnRestAPI.permissions import CanViewModifyObject
 
 # <editor-fold desc="StandardCRUD">
@@ -54,7 +55,7 @@ class KilnViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows groups to be viewed or edited.
     """
-    queryset = Kiln.objects.all()
+    queryset = Kiln.objects.all().order_by('kiln_id')
     serializer_class = KilnSerializer
 
 
@@ -95,3 +96,10 @@ class PublicKilnView(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save()
         kiln_admin = jt_Kiln_AdminViewSet()
+
+class KilnUserProfilePublicViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = KilnUserProfile.objects.all().order_by('user')
+    serializer_class = KilnUserProfilePublicSerializer

@@ -7,6 +7,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from KilnData import KilnDataLogic
 
+
 def add_kiln(_, kiln_name_in):
     new_kiln = models.Kiln()
     new_kiln.kiln_name= kiln_name_in
@@ -28,14 +29,28 @@ def add_update_kiln_data(request):
 
     return HttpResponse("Kiln Updated.")
 
+def add_update_kiln_user_profile_data(request):
+    # add a kiln or update a kiln's data.
+    # current_user_temp_display = models.KilnUserProfile.objects.get(user=request.user).temperature_display_units
+    kilns = models.Kiln.objects.all()
+    # favorite_kiln = models.KilnUserProfile.objects.get(user=request.user).kiln
+    form_data = {
+        # 'current_user_temp_display': current_user_temp_display,
+        # 'current_kiln': favorite_kiln,
+        'kilns': kilns
+    }
+    return render(request, './add_modify_kiln_user_profile.html', form_data)
+
+
+
 def view_kiln_data(request, kiln_id_in):
     this_kiln = models.Kiln.objects\
         .get(kiln_id= kiln_id_in)
     template_arguments = {}
     if (this_kiln is not None):
         template_arguments = {
-            'kiln_id' : this_kiln.kiln_id,
-            'kiln_name' : this_kiln.kiln_name,
+            'kiln_id': this_kiln.kiln_id,
+            'kiln_name': this_kiln.kiln_name,
         }
     return render(request, './add_modify_kiln.html', template_arguments)
 

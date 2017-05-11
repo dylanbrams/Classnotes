@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}View Kilns Initial{% endblock %}
+
+{% block content %}
+    <input type="hidden" name="kiln_id" value="{{kiln_id}}">
+    <input type="text" name="kiln_name" value="{{kiln_name}}" />
+    {% csrf_token %}
+    <button id="sendkilndata" > Update! </button>
+    <div name="message"> </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+/**
+ * Created by Dylan Brams on 4/25/2017.
+ */
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+$("#sendkilndata").click(function() {
+    var data = {};
+    data.kiln_name = $("[name=kiln_name]").val();
+    var csrftoken = $("[name=csrfmiddlewaretoken]").val();
+    $.ajax({
+        type: "PUT",
+        url: "/api/kiln/" + $("[name=kiln_id]").val() + "/",
+        contentType: "application/json;",
+        data: JSON.stringify(data),
+        dataType: "json",
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        },
+        success: function (data) {
+            if (data) {   // DO SOMETHING
+                var message = "Kiln Name Set To: " + data.kiln_name;
+                $("[name=message]").text(message);
+            } else {
+            }
+        },
+        error: function (data) {
+            if (data) {
+                var message = "Error! " + data.error();
+                $("[name=message]").text(message);
+            }
+        }
+    });
+});
+</script>
+{% endblock %}

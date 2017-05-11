@@ -2,20 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class KilnUserProfile(models.Model):
-    kiln_user_profile_id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(User)
-    temperature_display_units = models.CharField(default='C', max_length=1)
-
-    def __str__(self):
-        return str(self.kiln_user_profile_id)
-
-    def __repr__(self):
-        return 'UserProfile(user={!r}, userprofile_id={!r}))'.format(
-            self.user,
-            self.kiln_user_profile_id,
-        )
-
 class Program(models.Model):
     program_id = models.AutoField(primary_key=True)
     program_name = models.TextField()
@@ -126,4 +112,19 @@ class jt_Kiln_Program(models.Model):
             self.kiln,
             self.user,
             self.program
+        )
+
+class KilnUserProfile(models.Model):
+    kiln_user_profile_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User)
+    temperature_display_units = models.CharField(default='C', max_length=1)
+    kiln = models.ForeignKey(Kiln)
+
+    def __str__(self):
+        return str(self.kiln_user_profile_id)
+
+    def __repr__(self):
+        return 'UserProfile(user={!r}, userprofile_id={!r}))'.format(
+            self.user,
+            self.kiln_user_profile_id,
         )

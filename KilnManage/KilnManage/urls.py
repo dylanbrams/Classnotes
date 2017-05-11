@@ -35,10 +35,15 @@ router.register(r'kilnadmintype', rest_API_views.KilnAdminTypeViewSet)
 router.register(r'jtkilnadmin', rest_API_views.jt_Kiln_AdminViewSet)
 router.register(r'jtkilnprogram', rest_API_views.jt_Kiln_ProgramViewSet)
 
+router.register(r'kilnpublic', rest_API_views.PublicKilnView)
+router.register(r'kilnuserprofilepublic', rest_API_views.KilnUserProfilePublicViewSet)
+
+
 urlpatterns = [
     #Kilns
     url(r'^add_kiln/(?P<kiln_name_in>.+)/', KilnDataViews.add_kiln, name='add_kiln'),
     url(r'^add_update_kiln_data', KilnDataViews.add_update_kiln_data, name='add_update_kiln_data'),
+    url(r'^add_update_kiln_profile_data', KilnDataViews.add_update_kiln_user_profile_data, name='add_update_profile_data'),
     url(r'^view_kiln_data/(?P<kiln_id_in>.+)/', KilnDataViews.view_kiln_data, name='view_kiln_data'),
     url(r'^view_kiln/(?P<kiln_name_in>.+)/', KilnDataViews.view_kiln, name='view_kiln'),
 
@@ -54,7 +59,7 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, name='logout'),
     url(r'^api/', include(router.urls)),
 
-    url(r'^$', KilnDataViews.home, name='home'),
     url(r'^silk', include('silk.urls', namespace='silk')),
+    url(r'^$', KilnDataViews.home, name='home'),
 ]
 
